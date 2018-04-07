@@ -25,9 +25,11 @@ module.exports.get=async (req, res, next)=> {
   var key= req.params.key
   client.get(key, function (err, response){
     if (err || data==null) { // err is truthy if an actual error occurred
+      res.json({})
       return undefined;
     } else {
       userData = JSON.parse(data)
+      res.json(userData)
       return userData
     }
   })
