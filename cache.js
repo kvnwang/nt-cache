@@ -22,7 +22,7 @@ function get(key, data) {
 function remove(key) {
   client.del(key, function(err, response) {
     if (response == 1) {
-      console.log("Deleted Successfully!")
+      res.redirect('back');
     } else{
       console.log("Cannot delete")
     }

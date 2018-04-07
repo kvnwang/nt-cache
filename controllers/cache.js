@@ -6,6 +6,7 @@ module.exports.set = async (req, res, next) => {
   var key= req.params.key
   var data= req.params.data
   client.set(key, value)
+  req.redirect("back")
 };
 
 module.exports.delete=async(req, res, next) => {
@@ -14,9 +15,9 @@ module.exports.delete=async(req, res, next) => {
 
   client.del(key, function(err, response) {
     if (response == 1) {
-      console.log("Deleted Successfully!")
+      req.redirect("back")
     } else{
-      console.log("Cannot delete")
+      req.redirect("back")
     }
   });
 }
