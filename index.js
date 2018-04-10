@@ -16,9 +16,11 @@ app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
 const cache = require('./controllers/cache')
 const router = express.Router();
 //
-router.post('/search', cache.set);
-router.post('/search', cache.delete);
-router.get('/search', cache.get);
+
+
+router.post('/cache/:key/:data', cache.set);
+router.post('/cache/:key', cache.delete);
+router.get('/cache/:key', cache.get);
 
 
 app.use('/', router);
