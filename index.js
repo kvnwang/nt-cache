@@ -18,9 +18,9 @@ const router = express.Router();
 //
 
 
-router.post('/cache/:key/:data', cache.set);
-router.post('/cache/:key', cache.delete);
-router.get('/cache/:key', cache.get);
+router.post('/:key/:data', cache.set);
+router.post('/delete/:key', cache.delete);
+router.get('/:key', cache.get);
 
 
 app.use('/', router);

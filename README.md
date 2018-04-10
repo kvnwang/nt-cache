@@ -17,6 +17,6 @@ Caching Service for NanoTwitter proejct. This service will communicate with our 
 The User and Tweet Service will communicate with the caching service via http with the following routes:
 
 **Routes**
-* POST '/cache/:key/:data' : will cache a key, value pair with the key, data params passed to the url
-* POST '/cache/:key': will remove the key, value pair cached in redis asocaited with the key
-* GET '/cache/:key': gets data cached with the key param if avaliable
+* POST '/:key/:data' : will cache a key, value pair with the key, data params passed to the url
+* POST '/delete/:key': will remove the key, value pair cached in redis asocaited with the key
+* GET '/:key': gets data cached with the key param if avaliable
