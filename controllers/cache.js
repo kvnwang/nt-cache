@@ -2,18 +2,25 @@ var redis = require("redis")
 var REDIS_PORT = process.env.REDIS_URL || process.env.REDIS_PORT;
 var client = redis.createClient(REDIS_PORT);
 
+client.on("error", function (err, res) {
+    console.log("Error " + err);
+    console.log(res)
+
+});
+
 
 // TODO: Fix
 module.exports.set = async (req, res, next) => {
-  console.log(req.params)
-  var key= req.params.key
-  var value= req.params.data
+  var key= req.body.params['cacheKey']
+  var value= req.body.params['cacheData']
+  console.log(value)
   client.set(key, value, function(err, data){
     if(err) {
       res.send(err)
+      next();
     } else {
-      res.redirect("/")
-
+      res.json({key: JSON.stringify(value)})
+      console.log("set")
     }
   })
 };
@@ -38,13 +45,13 @@ module.exports.get=async (req, res, next)=> {
     if(err) {
       res.send(err)
     } else if(data==null) {
-      console.log("data not exist in cache")
-      res.json({})
-      return undefined;
+      console.log("Not Exists")
+      res.json(null)
+      // next()
     } else {
-      userData = JSON.parse(JSON.stringify(data))
-      res.json(userData)
-      return userData
+      console.log("Exists")
+      res.json(JSON.parse(JSON.stringify(data)))
+      // next()
     }
   })
 }

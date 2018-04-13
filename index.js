@@ -18,7 +18,8 @@ const router = express.Router();
 //
 
 
-router.post('/:key/:data', cache.set);
+router.post('/store/:key', cache.set);
+
 router.post('/delete/:key', cache.delete);
 router.get('/:key', cache.get);
 
