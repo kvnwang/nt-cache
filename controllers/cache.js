@@ -13,7 +13,6 @@ client.on("error", function (err, res) {
 module.exports.set = async (req, res, next) => {
   var key= req.body.params['cacheKey']
   var value= req.body.params['cacheData']
-  console.log(value)
   client.set(key, value, function(err, data){
     if(err) {
       res.send(err)
