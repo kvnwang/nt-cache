@@ -1,6 +1,5 @@
 var redis = require("redis")
 var REDIS_PORT = process.env.REDISCLOUD_URL || process.env.REDIS_PORT;
-console.log(process.env.REDISCLOUD_URL)
 var client = redis.createClient(REDIS_PORT);
 
 client.on("error", function (err, res) {
