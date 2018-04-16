@@ -2,13 +2,13 @@ require('newrelic')
 const throng = require('throng');
 const cache = require('./controllers/cache')
 const WORKERS = process.env.WEB_CONCURRENCY || 1;
-const port = process.env.PORT || 3000;
-throng({
-  workers: WORKERS,
-  lifetime: Infinity
-}, start);
+// const port = process.env.PORT || 3000;
+// throng({
+//   workers: WORKERS,
+//   lifetime: Infinity
+// }, start);
 
-function start() {
+// function start() {
 
   const express = require('express');
   const app = express();
@@ -38,4 +38,4 @@ function start() {
   app.use('/', router);
 
   app.listen(port);
-};
+// };
