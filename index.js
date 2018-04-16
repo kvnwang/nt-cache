@@ -1,29 +1,44 @@
-const express = require('express');
-const app = express();
-const port = process.env.PORT || 2000;
-
-/* ===========BODY_PARSER=========== */
-const bodyParser = require('body-parser');
-// Parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }));
-// Parse application/json
-app.use(bodyParser.json());
-// Parse application/vnd.api+json as json
-app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
-
-/* =============ROUTES============= */
-//
+var env = process.env.NODE_ENV || 'development';
+if(env=="production") {
+  require('newrelic')
+}
+const throng = require('throng');
 const cache = require('./controllers/cache')
-const router = express.Router();
-//
+const WORKERS = process.env.WEB_CONCURRENCY || 1;
+const port = process.env.PORT || 3000;
+throng({
+  workers: WORKERS,
+  lifetime: Infinity
+}, start);
+
+function start() {
+
+  const express = require('express');
+  const app = express();
+  const port = process.env.PORT || 2000;
+
+  /* ===========BODY_PARSER=========== */
+  const bodyParser = require('body-parser');
+  // Parse application/x-www-form-urlencoded
+  app.use(bodyParser.urlencoded({ extended: false }));
+  // Parse application/json
+  app.use(bodyParser.json());
+  // Parse application/vnd.api+json as json
+  app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
+
+  /* =============ROUTES============= */
+  //
+  const router = express.Router();
+  //
 
 
-router.post('/store/:key', cache.set);
+  router.post('/store/:key', cache.set);
 
-router.post('/delete/:key', cache.delete);
-router.get('/:key', cache.get);
+  router.post('/delete/:key', cache.delete);
+  router.get('/:key', cache.get);
 
 
-app.use('/', router);
+  app.use('/', router);
 
-app.listen(port);
+  app.listen(port);
+};
