@@ -1,7 +1,4 @@
-var env = process.env.NODE_ENV || 'development';
-if(env=='production') {
-  require('newrelic')
-}
+require('newrelic')
 const throng = require('throng');
 const cache = require('./controllers/cache')
 const WORKERS = process.env.WEB_CONCURRENCY || 1;
