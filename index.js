@@ -1,7 +1,9 @@
-require('newrelic')
+// require('newrelic')
+
 const throng = require('throng');
 const cache = require('./controllers/cache')
 const WORKERS = process.env.WEB_CONCURRENCY || 1;
+
 // const port = process.env.PORT || 3000;
 // throng({
 //   workers: WORKERS,
@@ -13,7 +15,13 @@ const WORKERS = process.env.WEB_CONCURRENCY || 1;
   const express = require('express');
   const app = express();
   const port = process.env.PORT || 2000;
+  var https = require('https');
+  https.globalAgent.maxSockets = Infinity;
+  app.https=http
 
+  var http = require('http');
+  https.globalAgent.maxSockets = Infinity;
+  app.http=http
   /* ===========BODY_PARSER=========== */
   const bodyParser = require('body-parser');
   // Parse application/x-www-form-urlencoded

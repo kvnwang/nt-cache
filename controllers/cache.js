@@ -1,4 +1,4 @@
-require ('newrelic');
+// require ('newrelic');
 var redis = require("redis")
 var REDIS_PORT = process.env.REDISCLOUD_URL || process.env.REDIS_PORT;
 var client = redis.createClient(REDIS_PORT);
