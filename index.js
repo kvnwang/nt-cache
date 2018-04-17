@@ -1,4 +1,4 @@
-// require('newrelic')
+require('newrelic')
 
 const throng = require('throng');
 const cache = require('./controllers/cache')
