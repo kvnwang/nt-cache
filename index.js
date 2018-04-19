@@ -3,7 +3,17 @@ require('newrelic')
 const throng = require('throng');
 const cache = require('./controllers/cache')
 const WORKERS = process.env.WEB_CONCURRENCY || 1;
+const cluster = require('cluster');
 
+// Code to run if we're in the master process
+if (cluster.isMaster) {
+  // Create a worker for each WORKERS
+  for (var i = 0; i < WORKERS; i += 1) {
+    console.log("Spawning workers")
+    cluster.fork();
+  }
+  // Code to run if we're in a worker process
+} else {
 // const port = process.env.PORT || 3000;
 // throng({
 //   workers: WORKERS,
@@ -48,3 +58,4 @@ const WORKERS = process.env.WEB_CONCURRENCY || 1;
 
   app.listen(port);
 // };
+}

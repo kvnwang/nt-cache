@@ -11,6 +11,7 @@
   "dependencies": {
     "amqp": "^0.2.6",
     "amqplib": "^0.5.2",
+    "cluster": "^0.7.7",
     "commander": "^2.15.1",
     "content-disposition": "^0.5.2",
     "express": "^4.16.3",
